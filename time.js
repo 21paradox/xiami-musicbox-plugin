@@ -1,8 +1,8 @@
-// ==UserScript==
+ï»¿// ==UserScript==
 // @name         My Fancy New Userscript
 // @namespace    21paradox@outlook.com
 // @version      0.1
-// @description  xiami ÒôÀÖºĞ Ğ¡¾ß
+// @description  xiami éŸ³ä¹ç›’ å°å…·
 // @author       21paradox
 // @include        http://www.xiami.com/play*
 // @grant        none
@@ -12,7 +12,7 @@
 $(window).on('load', function () {
 
 
-    // Ôö¼Ó ·¢ËÍµÄ¼à¿Ø
+    // å¢åŠ  å‘é€çš„ç›‘æ§
     function add() {
 
         var messageTextArea = $('.my-message');
