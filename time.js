@@ -2,7 +2,7 @@
 // @name         My Fancy New Userscript
 // @namespace    21paradox@outlook.com
 // @version      0.1
-// @description  xiami éŸ³ä¹ç›’ å°å…·å·¥
+// @description  xiami ÒôÀÖºĞ Ğ¡¾ß
 // @author       21paradox
 // @include        http://www.xiami.com/play*
 // @grant        none
@@ -12,7 +12,7 @@
 $(window).on('load', function () {
 
 
-    // å¢åŠ  å‘é€çš„ç›‘æ§
+    // Ôö¼Ó ·¢ËÍµÄ¼à¿Ø
     function add() {
 
         var messageTextArea = $('.my-message');
@@ -74,7 +74,6 @@ $(window).on('load', function () {
 
             lastkey = e.which;
         });
-
     }
 
     // http://stackoverflow.com/questions/5658849/whats-the-equivalent-of-jquerys-trigger-method-without-jquery
@@ -89,13 +88,14 @@ $(window).on('load', function () {
 
     if ($('.my-message')) {
 
-        add();
+        setTimeout(add, 1000);
         console.log('run')
 
     } else {
-
         $('.seiya-btn').one('click', function () {
+
             setTimeout(add, 1000);
+
         });
     }
 
