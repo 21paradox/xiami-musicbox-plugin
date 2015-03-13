@@ -3,14 +3,17 @@
 // @namespace    21paradox@outlook.com
 // @version      0.1
 // @description  xiami 音乐盒 小具
-// @author       21paradox
-// @include        http://www.xiami.com/play*
+// @author       https://github.com/21paradox/xiami-musicbox-plugin
+// @include      http://www.xiami.com/play*
 // @grant        none
 // ==/UserScript==
 
 
 $(window).on('load', function () {
+    setTimeout(init, 1000);
+});
 
+function init() {
 
     // 增加 发送的监控
     function add() {
@@ -89,15 +92,12 @@ $(window).on('load', function () {
     if ($('.my-message')) {
 
         setTimeout(add, 1000);
-        console.log('run')
+        console.log('init xiami 时间戳 插件')
 
     } else {
+
         $('.seiya-btn').one('click', function () {
-
             setTimeout(add, 1000);
-
         });
     }
-
-
-});
+}
