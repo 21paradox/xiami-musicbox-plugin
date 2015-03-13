@@ -1,5 +1,5 @@
 ﻿// ==UserScript==
-// @name         My Fancy New Userscript
+// @name         虾米音乐盒 发布信息自动加时间戳
 // @namespace    21paradox@outlook.com
 // @version      0.1
 // @description  xiami 音乐盒 小具
