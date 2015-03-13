@@ -1,4 +1,4 @@
-﻿// ==UserScript==
+// ==UserScript==
 // @name         My Fancy New Userscript
 // @namespace    21paradox@outlook.com
 // @version      0.1
