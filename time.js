@@ -1,11 +1,16 @@
+// ==UserScript==
+// @name         My Fancy New Userscript
+// @namespace    21paradox@outlook.com
+// @version      0.1
+// @description  xiami 音乐盒 小具工
+// @author       21paradox
+// @include        http://www.xiami.com/play*
+// @grant        none
+// ==/UserScript==
 
 
+$(window).on('load', function () {
 
-$(function () {
-
-    if (location.href.indexOf('http://www.xiami.com/play?ids=/song/playlist/id') !== 0) {
-        return;
-    }
 
     // 增加 发送的监控
     function add() {
@@ -36,7 +41,15 @@ $(function () {
             var minutes = date.getMinutes();
             var seconds = date.getSeconds();
 
-            var valnew = val + ' At: ' + hour + ':' + minutes + ':' + seconds;
+            if (minutes < 10) {
+                minutes = '0' + minutes;
+            }
+
+            if (seconds < 10) {
+                seconds = '0' + seconds;
+            }
+
+            var valnew = 'At: ' + hour + ':' + minutes + ':' + seconds + ' ' + val;
 
             messageTextArea.val(valnew);
 
@@ -44,6 +57,22 @@ $(function () {
 
             messageTextAreaCopy.val('');
 
+        });
+
+        $('.smile-list').on('click', 'li', function (e) {
+
+            var emoji = $(this).text();
+            messageTextAreaCopy.val(messageTextAreaCopy.val() + emoji);
+        });
+
+        var lastkey;
+        messageTextAreaCopy.on('keyup', function (e) {
+
+            if (e.which == 13 && lastkey == 16) {
+                sendBtnCopy.click();
+            }
+
+            lastkey = e.which;
         });
 
     }
@@ -58,10 +87,17 @@ $(function () {
         (evt) ? el.dispatchEvent(evt) : (el.click && el.click());
     }
 
-    $('.seiya-btn').one('click', function () {
+    if ($('.my-message')) {
 
-        setTimeout(add, 1000);
+        add();
+        console.log('run')
 
-    });
+    } else {
+
+        $('.seiya-btn').one('click', function () {
+            setTimeout(add, 1000);
+        });
+    }
+
 
 });
