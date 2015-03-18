@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         虾米音乐盒 发布信息自动加时间戳
 // @namespace    21paradox@outlook.com
-// @version      0.2.1
+// @version      0.2.2
 // @description  xiami 直播间 小工具
 // @author       https://github.com/21paradox/xiami-musicbox-plugin
 // @include      http://www.xiami.com/play*
