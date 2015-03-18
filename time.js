@@ -57,7 +57,7 @@ function init() {
 
             simulateClick(sendBtn[0]);
 
-            messageTextAreaCopy.val('');
+            messageTextAreaCopy.val(null);
 
         });
 
@@ -98,4 +98,6 @@ function init() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', init ,false);
+document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(init, 1000);
+}, false);
