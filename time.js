@@ -53,13 +53,6 @@ function init() {
 
             var valnew = 'At: ' + hour + ':' + minutes + ':' + seconds + ' ' + val;
 
-
-            //valnew = valnew.replace(/[\n]/g, "<br>&nbsp;&nbsp;&nbsp;&nbsp;");
-
-            valnew = valnew.replace(/[\n]/g, "\r");
-
-            console.log(valnew);
-
             messageTextArea.val(valnew);
 
             simulateClick(sendBtn[0]);
@@ -99,10 +92,8 @@ function init() {
 
     } else {
 
-        console.log($);
-
         $('.seiya-btn').one('click', function () {
-            setTimeout(add, 1000);
+            setTimeout(add, 1500);
         });
     }
 }
