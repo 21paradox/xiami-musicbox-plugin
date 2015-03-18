@@ -57,7 +57,7 @@ function init() {
 
             simulateClick(sendBtn[0]);
 
-            messageTextAreaCopy.val(null);
+            messageTextAreaCopy.val('');
 
         });
 
