@@ -8,19 +8,18 @@
 // @grant        none
 // ==/UserScript==
 
-
-$(window).on('load', function () {
-    setTimeout(init, 1000);
-});
+console.log('init');
 
 function init() {
 
+
     // 增加 发送的监控
     function add() {
+        console.log('init xiami 时间戳 插件')
 
         var messageTextArea = $('.my-message');
 
-        var messageTextAreaCopy = messageTextArea.clone();
+        var messageTextAreaCopy = messageTextArea.clone().attr('xiami-input-copy', true);
 
         messageTextArea.after(messageTextAreaCopy).hide();
 
@@ -54,6 +53,13 @@ function init() {
 
             var valnew = 'At: ' + hour + ':' + minutes + ':' + seconds + ' ' + val;
 
+
+            //valnew = valnew.replace(/[\n]/g, "<br>&nbsp;&nbsp;&nbsp;&nbsp;");
+
+            valnew = valnew.replace(/[\n]/g, "\r");
+
+            console.log(valnew);
+
             messageTextArea.val(valnew);
 
             simulateClick(sendBtn[0]);
@@ -66,16 +72,14 @@ function init() {
 
             var emoji = $(this).text();
             messageTextAreaCopy.val(messageTextAreaCopy.val() + emoji);
+            messageTextAreaCopy.focus();
         });
 
-        var lastkey;
-        messageTextAreaCopy.on('keyup', function (e) {
+        messageTextAreaCopy.on('keypress', function (e) {
 
-            if (e.which == 13 && lastkey == 16) {
+            if (e.which == 13 && !event.shiftKey) {
                 sendBtnCopy.click();
             }
-
-            lastkey = e.which;
         });
     }
 
@@ -89,15 +93,18 @@ function init() {
         (evt) ? el.dispatchEvent(evt) : (el.click && el.click());
     }
 
-    if ($('.my-message')) {
+    if ($('.my-message').length) {
 
-        setTimeout(add, 1000);
-        console.log('init xiami 时间戳 插件')
+        add();
 
     } else {
+
+        console.log($);
 
         $('.seiya-btn').one('click', function () {
             setTimeout(add, 1000);
         });
     }
 }
+
+document.addEventListener('DOMContentLoaded', init ,false);
