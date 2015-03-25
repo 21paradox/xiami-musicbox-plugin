@@ -46,12 +46,13 @@ page.open('http://www.xiami.com', function (status) {
 
                 newPage.includeJs('http://libs.baidu.com/jquery/1.9.0/jquery.js', function () {
 
-                    newPage.evaluate(function () {
+                    var title = newPage.evaluate(function () {
 
                         //document.getElementById('u').value = 
-                        console.log(document.title);
+                        return $('#ptlogin_iframe').contents().find('#u').attr('class');
                     });
 
+                    console.log(title);
                     phantom.exit();
 
                 });
