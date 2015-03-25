@@ -1,13 +1,14 @@
 ﻿// ==UserScript==
 // @name         虾米音乐盒 发布信息自动加时间戳
 // @namespace    21paradox@outlook.com
-// @version      0.2.2
+// @version      0.2.3
 // @description  xiami 直播间 小工具
 // @author       https://github.com/21paradox/xiami-musicbox-plugin
 // @include      http://www.xiami.com/play*
 // @grant        none
 // ==/UserScript==
 
+//下载地址 https://greasyfork.org/zh-CN/scripts/8572-%E8%99%BE%E7%B1%B3%E9%9F%B3%E4%B9%90%E7%9B%92-%E5%8F%91%E5%B8%83%E4%BF%A1%E6%81%AF%E8%87%AA%E5%8A%A8%E5%8A%A0%E6%97%B6%E9%97%B4%E6%88%B3
 console.log('init');
 
 function init() {
