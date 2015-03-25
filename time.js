@@ -71,6 +71,7 @@ function init() {
         messageTextAreaCopy.on('keypress', function (e) {
 
             if (e.which == 13) {
+                e.preventDefault();
                 sendBtnCopy.click();
             }
         });
