@@ -1,0 +1,19 @@
+{
+  "name": "xiami-tool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "time.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/21paradox/xiami-musicbox-plugin.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/21paradox/xiami-musicbox-plugin/issues"
+  },
+  "homepage": "https://github.com/21paradox/xiami-musicbox-plugin"
+}
