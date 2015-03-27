@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         虾米音乐盒 发布信息自动加时间戳
 // @namespace    21paradox@outlook.com
-// @version      0.2.3
+// @version      0.2.4
 // @description  xiami 直播间 小工具
 // @author       https://github.com/21paradox/xiami-musicbox-plugin
 // @include      http://www.xiami.com/play*
@@ -9,97 +9,68 @@
 // ==/UserScript==
 
 //下载地址 https://greasyfork.org/zh-CN/scripts/8572-%E8%99%BE%E7%B1%B3%E9%9F%B3%E4%B9%90%E7%9B%92-%E5%8F%91%E5%B8%83%E4%BF%A1%E6%81%AF%E8%87%AA%E5%8A%A8%E5%8A%A0%E6%97%B6%E9%97%B4%E6%88%B3
-console.log('init');
 
-function init() {
+KISSY.use('core', function (KISSY) {
 
+    var $ = KISSY.Node.all;
 
-    // 增加 发送的监控
-    function add() {
-        console.log('init xiami 时间戳 插件')
+    function change() {
+        var val = $('.my-message').val();
 
-        var messageTextArea = $('.my-message');
+        var date = new Date();
 
-        var messageTextAreaCopy = messageTextArea.clone().attr('xiami-input-copy', true);
+        var hour = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
 
-        messageTextArea.after(messageTextAreaCopy).hide();
-
-        var sendBtn = $('.btn-send');
-
-        var sendBtnCopy = sendBtn.clone();
-
-        sendBtn.after(sendBtnCopy).hide();
-
-        sendBtnCopy.on('click', function () {
-
-            var val = messageTextAreaCopy.val();
-
-            if (!val) {
-                return;
-            }
-
-            var date = new Date();
-
-            var hour = date.getHours();
-            var minutes = date.getMinutes();
-            var seconds = date.getSeconds();
-
-            if (minutes < 10) {
-                minutes = '0' + minutes;
-            }
-
-            if (seconds < 10) {
-                seconds = '0' + seconds;
-            }
-
-            var valnew = 'At: ' + hour + ':' + minutes + ':' + seconds + ' ' + val;
-
-            messageTextArea.val(valnew);
-
-            simulateClick(sendBtn[0]);
-
-            messageTextAreaCopy.val('');
-
-        });
-
-        $('.smile-list').on('click', 'li', function (e) {
-
-            var emoji = $(this).text();
-            messageTextAreaCopy.val(messageTextAreaCopy.val() + emoji);
-            messageTextAreaCopy.focus();
-        });
-
-        messageTextAreaCopy.on('keypress', function (e) {
-
-            if (e.which == 13) {
-                e.preventDefault();
-                sendBtnCopy.click();
-            }
-        });
-    }
-
-    // http://stackoverflow.com/questions/5658849/whats-the-equivalent-of-jquerys-trigger-method-without-jquery
-    function simulateClick(el) {
-        var evt;
-        if (document.createEvent) {
-            evt = document.createEvent("MouseEvents");
-            evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        if (minutes < 10) {
+            minutes = '0' + minutes;
         }
-        (evt) ? el.dispatchEvent(evt) : (el.click && el.click());
+
+        if (seconds < 10) {
+            seconds = '0' + seconds;
+        }
+
+        var valnew = 'At: ' + hour + ':' + minutes + ':' + seconds + ' ' + val;
+
+        var $msg = $('.my-message');
+
+        $msg.val(valnew);
+
+        $('.btn-send').fire('click');
+
     }
 
-    if ($('.my-message').length) {
+    $(document).on('keypress', function (e) {
+        if (e.which === 112) {
+            $('#J_volumeSpeaker').fire('click')
+        }
+    });
 
-        add();
+    KISSY.ready(function (S) {
 
-    } else {
+        setTimeout(function () {
+            console.log('init xiami 时间戳 插件');
 
-        $('.seiya-btn').one('click', function () {
-            setTimeout(add, 1500);
-        });
-    }
-}
+            $('.btn-send').on('mousedown', function (e) {
+                change();
+            });
 
-document.addEventListener('DOMContentLoaded', function () {
-    setTimeout(init, 1000);
-}, false);
+            $('.my-message').detach().on('keypress', function (e) {
+                if (e.which == 13) {
+                    e.preventDefault();
+                    change();
+                }
+            })
+
+            .on('focus', function (e) {
+
+                if ($(this).val() === '请输入内容') {
+                    $(this).val('');
+                }
+            });
+
+        }, 1000);
+    });
+
+});
