@@ -93,8 +93,6 @@ KISSY.use('core', function (KISSY) {
             }, 200);    
         });
 
-
-
     });
 
 });
