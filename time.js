@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
-// @name         虾米音乐盒 发布信息自动加时间戳
+// @name         虾米音乐盒 发布信息自动加时间戳，设置flash为direct模式, firefox/chrome下有更好性能
 // @namespace    21paradox@outlook.com
-// @version      0.2.4
+// @version      0.2.5
 // @description  xiami 直播间 小工具
 // @author       https://github.com/21paradox/xiami-musicbox-plugin
 // @include      http://www.xiami.com/play*
@@ -50,7 +50,7 @@ KISSY.use('core', function (KISSY) {
     KISSY.ready(function (S) {
 
         setTimeout(function () {
-            console.log('init xiami 时间戳 插件');
+            //console.log('init xiami 时间戳 插件');
 
             $('.btn-send').on('mousedown', function (e) {
                 change();
@@ -59,11 +59,12 @@ KISSY.use('core', function (KISSY) {
             $('.my-message').detach().on('keypress', function (e) {
                 if (e.which == 13) {
                     e.preventDefault();
+                    e.stopPropagation();
                     change();
                 }
             })
 
-            .on('focus', function (e) {
+                .on('focus', function (e) {
 
                 if ($(this).val() === '请输入内容') {
                     $(this).val('');
@@ -71,6 +72,29 @@ KISSY.use('core', function (KISSY) {
             });
 
         }, 1000);
+
+        $(window).on('load', function () {
+
+            var timer = setTimeout(function findXiamiSwfPlayer() {
+                
+                // 如果找到了 flash插件,设置成为 direct模式
+                // http://stackoverflow.com/questions/886864/differences-between-using-wmode-transparent-opaque-or-window-for-an-embe
+                // https://helpx.adobe.com/flash/kb/flash-object-embed-tag-attributes.html
+                // direct 模式性能最高, chrome/firefox兼容好点
+                if (J_xiamiPlayerSwf != null) {
+
+                    clearTimeout(timer);
+                    J_xiamiPlayerSwf.querySelector('[name="wmode"]').setAttribute('wmode', 'direct');
+                    return;
+                }
+
+                setTimeout(findXiamiSwfPlayer, 200);
+
+            }, 200);    
+        });
+
+
+
     });
 
 });
