@@ -1,7 +1,7 @@
 ﻿// ==UserScript==
 // @name         虾米音乐盒 发布信息自动加时间戳，设置flash为direct模式, firefox/chrome下有更好性能
 // @namespace    21paradox@outlook.com
-// @version      0.2.6
+// @version      0.2.7
 // @description  xiami 直播间 小工具
 // @author       https://github.com/21paradox/xiami-musicbox-plugin
 // @include      http://www.xiami.com/play*
@@ -49,34 +49,37 @@ KISSY.use('core', function (KISSY) {
 
     KISSY.ready(function (S) {
 
-        setTimeout(init, 1000);
+        setTimeout(function () {
+            init();
+        }, 1000);
 
-        var init = function() {
-            
-           $('.btn-send').detach('mousedown.timep').on('mousedown.timep', function (e) {
+        var init = function () {
+
+            $('.btn-send').detach('mousedown.timep').on('mousedown.timep', function (e) {
                 change();
             });
 
+
             $('.my-message').detach().on('keypress', function (e) {
-                
+
                 e.stopPropagation();
-                
+
                 if (e.which == 13) {
                     e.preventDefault();
                     change();
                 }
             })
 
-            .on('focus', function (e) {
+                .on('focus', function (e) {
 
                 if ($(this).val() === '请输入内容') {
                     $(this).val('');
                 }
-            });   
+            });
         }
-                
-       $(document).delegate('click','.seiya-btn', init);
-        
+
+        $(document).delegate('click', '.btn-enter', init);
+
         $(window).on('load', function () {
 
             var timer = setTimeout(function findXiamiSwfPlayer() {
@@ -94,7 +97,7 @@ KISSY.use('core', function (KISSY) {
 
                 setTimeout(findXiamiSwfPlayer, 200);
 
-            }, 200);    
+            }, 200);
         });
 
     });
